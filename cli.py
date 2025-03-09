@@ -3,7 +3,7 @@ from models import get_session, Dev, Company, Freebie
 session = get_session()
 
 def list_dev_freebies():
-    dev_name = input("Enter the developer's name: ")
+    dev_name = input("Enter the developer's name:(e.g Musk,Louis) ")
     dev = session.query(Dev).filter_by(name=dev_name).first()
     if dev:
         if dev.freebies:
@@ -16,7 +16,7 @@ def list_dev_freebies():
         print("Developer not found.")
 
 def list_company_freebies():
-    company_name = input("Enter the company name: ")
+    company_name = input("Enter the company name:(e.g OpenAI,Grok) ")
     company = session.query(Company).filter_by(name=company_name).first()
     if company:
         if company.freebies:
@@ -29,7 +29,7 @@ def list_company_freebies():
         print("Company not found.")
 
 def list_company_devs():
-    company_name = input("Enter the company name: ")
+    company_name = input("Enter the company name:(e.g Grok,OpenAI) ")
     company = session.query(Company).filter_by(name=company_name).first()
     if company:
         devs = {freebie.dev.name for freebie in company.freebies}
@@ -41,10 +41,10 @@ def list_company_devs():
         print("Company not found.")
 
 def give_freebie():
-    company_name = input("Enter the company name: ")
-    dev_name = input("Enter the developer's name: ")
-    item_name = input("Enter the freebie item name: ")
-    value = int(input("Enter the value of the freebie: "))
+    company_name = input("Enter the company name:(e.g Grok,OpenAI) ")
+    dev_name = input("Enter the developer's name: (e.g Musk,Louis)")
+    item_name = input("Enter the freebie item name:(e.g Laptop if Louis,T-shirt if Musk) ")
+    value = int(input("Enter the value of the freebie:(e.g 2000 for Laptop,20 for T-shirt ) "))
 
     company = session.query(Company).filter_by(name=company_name).first()
     dev = session.query(Dev).filter_by(name=dev_name).first()
@@ -65,8 +65,8 @@ def find_oldest_company():
         print("No companies found.")
 
 def check_freebie_ownership():
-    dev_name = input("Enter the developer's name: ")
-    item_name = input("Enter the freebie item name: ")
+    dev_name = input("Enter the developer's name:(e.g Musk,Louis) ")
+    item_name = input("Enter the freebie item name:(e.g Laptop if Louis,T-shirt if Musk) ")
     dev = session.query(Dev).filter_by(name=dev_name).first()
 
     if dev:
@@ -78,9 +78,9 @@ def check_freebie_ownership():
         print("Developer not found.")
 
 def transfer_freebie():
-    from_dev_name = input("Enter the name of the developer giving away the freebie: ")
-    to_dev_name = input("Enter the name of the developer receiving the freebie: ")
-    item_name = input("Enter the name of the freebie being transferred: ")
+    from_dev_name = input("Enter the name of the developer giving away the freebie:(e.g Louis,Musk) ")
+    to_dev_name = input("Enter the name of the developer receiving the freebie:(e.g Musk,Louis) ")
+    item_name = input("Enter the name of the freebie being transferred:(Laptop from Louis,T-shirt from Musk) ")
 
     from_dev = session.query(Dev).filter_by(name=from_dev_name).first()
     to_dev = session.query(Dev).filter_by(name=to_dev_name).first()
