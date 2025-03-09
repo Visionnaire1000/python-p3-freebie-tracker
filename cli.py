@@ -1,4 +1,4 @@
-from models import get_session, Dev, Company, Freebie
+from lib.models import get_session, Dev, Company, Freebie
 
 session = get_session()
 
